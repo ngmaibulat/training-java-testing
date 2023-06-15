@@ -1,5 +1,7 @@
 //console application
 
+package com.ngm;
+
 import java.util.Scanner;
 
 public class app {
