@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import com.ngm.Calculator;
 
 public class CalculatorTest {
 
@@ -8,14 +9,14 @@ public class CalculatorTest {
         var calculator = new Calculator();
 
         // var fn = () -> {
-        //     calculator.somefn(0.0);
+        // calculator.somefn(0.0);
         // };
-        
+
         assertThrows(IllegalArgumentException.class, () -> {
             calculator.somefn(0.0);
         });
     }
-    
+
     @Test
     public void testAddition() {
         var calculator = new Calculator();
@@ -41,7 +42,7 @@ public class CalculatorTest {
         Object value = null;
         assertNull(value);
     }
-    
+
     @Test
     public void testSubtraction() {
         var calculator = new Calculator();
