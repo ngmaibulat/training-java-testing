@@ -1,6 +1,8 @@
-### Tshoot
+### Hibernate ORM
 
-CMD+SHIFT+P -> Java: Clean the Java language server workspace
+-   findAll
+-   findById
+-   Query
 
 ### Unit Testing
 
