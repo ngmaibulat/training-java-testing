@@ -8,6 +8,13 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0'
+
+    // implementation 'javax.persistence:persistence-api:2.2'
+    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.2.5.Final'
 }
 
 test {

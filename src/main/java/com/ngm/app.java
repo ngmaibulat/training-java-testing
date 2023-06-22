@@ -3,6 +3,7 @@
 package com.ngm;
 
 import java.util.Scanner;
+import org.hibernate.SessionFactory;
 
 public class app {
     public static void main(String[] args) {
@@ -11,5 +12,7 @@ public class app {
         int num = input.nextInt();
         System.out.println("You entered " + num);
         input.close();
+
+        SessionFactory sessionFactory = HibernateConfig.buildSessionFactory();
     }
 }
