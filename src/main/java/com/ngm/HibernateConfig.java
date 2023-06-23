@@ -32,7 +32,7 @@ public class HibernateConfig {
 
         // Other Hibernate properties
         configuration.setProperty("hibernate.dialect", getVariable("DB_DIALECT"));
-        configuration.setProperty("hibernate.show_sql", "true");
+        // configuration.setProperty("hibernate.show_sql", "true");
 
 
         // configuration.setProperty("hibernate.connection.driver_class", "org.sqlite.JDBC");

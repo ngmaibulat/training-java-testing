@@ -2,11 +2,50 @@
 
 package com.ngm;
 
+import java.util.List;
 import java.util.Scanner;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class app {
+
+    public static SessionFactory sessionFactory;
+    public static Session session;
+    private static final Logger logger = LoggerFactory.getLogger(app.class);
+
+    public static Session getSession() {
+        try {
+            sessionFactory = HibernateConfig.buildSessionFactory();
+            session = sessionFactory.openSession();
+            return session;
+        }
+        catch (IllegalStateException e) {
+            logger.error("Connection error. Please check env variables");
+            // System.out.println("Connection error. Please check env variables");
+            // exit the program
+            System.exit(0);
+        }
+        catch (org.hibernate.service.spi.ServiceException e) {
+            logger.error("Connection error. Please check env variables");
+            // System.out.println("Connection error. Please check env variables");
+            // exit the program
+            System.exit(0);
+        }
+        catch (Throwable t) {
+            logger.error("Unknown Error.");
+            // System.out.println(t.getMessage());
+            System.out.println("Class:" + t.getClass().getName());
+            // exit the program
+            System.exit(0);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         // Scanner input = new Scanner(System.in);
         // System.out.println("Enter a number: ");
@@ -14,8 +53,13 @@ public class app {
         // System.out.println("You entered " + num);
         // input.close();
 
-        SessionFactory sessionFactory = HibernateConfig.buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        // logger.info("This is an informational message");
+        // logger.debug("This is a debug message");
+        // logger.warn("This is a warning message");
+        // logger.error("This is an error message");
+
+        // SessionFactory sessionFactory;
+        Session session = getSession();
 
         // Contact c = new Contact("David", "Linch", "+9 999 999 99 99");
         
@@ -25,6 +69,20 @@ public class app {
 
         c.setFname("John");
         c.setLname("Doe");
+
+        String hql = "FROM Contact"; // Replace 'EntityClass' with the actual class name of your entity
+
+        // Execute the query
+        Query<Contact> query = session.createQuery(hql, Contact.class);
+        List<Contact> records = query.getResultList();
+
+        for (Contact contact : records) {
+            System.out.println("Contact ID: " + contact.getId());
+            System.out.println("Name: " + contact.getFname());
+            // System.out.println("Email: " + contact.getEmail());
+            System.out.println("Phone: " + contact.getPhone());
+            System.out.println("-------------------------");
+        }
 
 
         // sessionFactory.
