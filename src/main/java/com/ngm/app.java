@@ -11,6 +11,9 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.jakewharton.picnic.Table;
+// import com.jakewharton.picnic.TableRow;
+
 
 public class app {
 
@@ -70,10 +73,12 @@ public class app {
         c.setFname("John");
         c.setLname("Doe");
 
-        String hql = "FROM Contact"; // Replace 'EntityClass' with the actual class name of your entity
+        String hql = "FROM Contact WHERE fname like :query"; // Replace 'EntityClass' with the actual class name of your entity
 
         // Execute the query
         Query<Contact> query = session.createQuery(hql, Contact.class);
+        query.setParameter("query", "a%");
+
         List<Contact> records = query.getResultList();
 
         for (Contact contact : records) {
@@ -84,6 +89,10 @@ public class app {
             System.out.println("-------------------------");
         }
 
+        // var tb = new Table.Builder();
+        
+        Table table = new Table.Builder().build();
+        System.out.println(table);
 
         // sessionFactory.
 

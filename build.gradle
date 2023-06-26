@@ -18,6 +18,8 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.8'
     implementation 'ch.qos.logback:logback-core:1.4.8'
 
+    implementation 'com.jakewharton.picnic:picnic:0.6.0'
+
     // https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
     implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
 
