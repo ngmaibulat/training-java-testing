@@ -11,9 +11,16 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jakewharton.picnic.Table;
-// import com.jakewharton.picnic.TableRow;
+// import com.jakewharton.picnic.Table;
+// import com.jakewharton.picnic.TableSection;
+// import com.jakewharton.picnic.Row;
+// import com.jakewharton.picnic.Cell;
+// import com.jakewharton.picnic.CellStyle;
+// import com.jakewharton.picnic.TextAlignment;
 
+
+import com.mitchtalmadge.asciidata.table.ASCIITable;
+import com.mitchtalmadge.asciidata.table.formats.UTF8TableFormat;
 
 public class app {
 
@@ -50,6 +57,9 @@ public class app {
     }
 
     public static void main(String[] args) {
+        // DumpClass dc = new DumpClass(String.class);
+        // dc.printMethods();
+
         // Scanner input = new Scanner(System.in);
         // System.out.println("Enter a number: ");
         // int num = input.nextInt();
@@ -77,21 +87,29 @@ public class app {
 
         // Execute the query
         Query<Contact> query = session.createQuery(hql, Contact.class);
-        query.setParameter("query", "a%");
+        query.setParameter("query", "%");
 
         List<Contact> records = query.getResultList();
 
+        String[][] contactsArray = new String[records.size()][3];
+
+        int i = 0; // Counter for the outer array
+
         for (Contact contact : records) {
-            System.out.println("Contact ID: " + contact.getId());
-            System.out.println("Name: " + contact.getFname());
-            // System.out.println("Email: " + contact.getEmail());
-            System.out.println("Phone: " + contact.getPhone());
-            System.out.println("-------------------------");
+            // Assign contact details to the array
+            contactsArray[i][0] = String.valueOf(contact.getId());
+            contactsArray[i][1] = contact.getFname();
+            contactsArray[i][2] = contact.getPhone();
+
+            // Increment counter
+            i++;
         }
 
-        // var tb = new Table.Builder();
-        
-        Table table = new Table.Builder().build();
+        String[] headers = new String[]{"ID", "Name", "Phone"};
+
+        var table = ASCIITable.fromData(headers, contactsArray).withTableFormat(new UTF8TableFormat()).toString();
+        // var table = ASCIITable.fromData(headers, data).toString();
+
         System.out.println(table);
 
         // sessionFactory.
